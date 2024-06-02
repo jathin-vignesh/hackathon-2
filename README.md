@@ -6,6 +6,9 @@ This project is called as the Library Reservation System. Our motto is to blid a
 5. No.of copies
 6. Cover photo
 7. Reserve button(if book is available otherwise it'll show unavailable)
+   
 These are the sections that can be seen/ accessed by the users.
 By successful reservation the users will get a system generated reciept which they can print and submit it on the library for their required book.
+
+
 There is also a admin account with which you can add, delete and also edit the names of the books, authors, copies and the cover photo. Basically you can control everything from the admin account.
