@@ -1,4 +1,8 @@
 # hackathon-2
+
+**The LibraryReservationSystem contains all the codes and the books folder contains the cover photos of the books I used in video presentation.**
+
+
 This project is called as the Library Reservation System. Our motto is to blid a website which is focused on the time-saving and easy-to-use for th users who are looking to borrow a book from the library. This will basically make sure that the book you desired will be available and reserved for you incase you want it. In our website each book will have the following sections:
 1. Book name
 2. Author name
