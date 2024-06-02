@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Books</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+    <h1 class="mt-5">Manage Books</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Copies</th>
+                <th>Available</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.copies }}</td>
+                <td>{{ 'Yes' if book.available else 'No' }}</td>
+                <td>
+                    {% if book.photo %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ book.photo) }}" alt="Book Photo" width="100">
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/admin/dashboard" class="btn btn-primary">Back to Dashboard</a>
+</body>
+</html>
