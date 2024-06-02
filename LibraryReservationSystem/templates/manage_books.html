@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #343a40;
+        }
+        .table {
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px;
+        }
+        .btn {
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .input-field {
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 5px;
+            width: 100%;
+        }
+        .form-inline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-inline img {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body class="container">
+    <h1 class="mt-5">Manage Books</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Copies</th>
+                    <th>Available</th>
+                    <th>Photo</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td><input type="text" name="title_{{ book.id }}" value="{{ book.title }}" class="input-field"></td>
+                    <td><input type="text" name="author_{{ book.id }}" value="{{ book.author }}" class="input-field"></td>
+                    <td><input type="number" name="copies_{{ book.id }}" value="{{ book.copies }}" class="input-field"></td>
+                    <td>{{ 'Yes' if book.available else 'No' }}</td>
+                    <td class="form-inline">
+                        {% if book.photo %}
+                        <img src="{{ url_for('static', filename='uploads/' ~ book.photo) }}" alt="Book Photo" width="100">
+                        {% endif %}
+                        <input type="file" name="photo_{{ book.id }}">
+                    </td>
+                    <td>
+                        <button type="submit" name="update" value="{{ book.id }}" class="btn btn-primary">Update</button>
+                        <button type="submit" name="delete" value="{{ book.id }}" class="btn btn-primary">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+    <a href="/admin/dashboard" class="btn btn-primary">Back to Dashboard</a>
+</body>
+</html>

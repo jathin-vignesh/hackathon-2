@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #343a40;
+        }
+        .table {
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            width: 100%;
+        }
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px;
+        }
+        .btn {
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 5px;
+        }
+        .btn-success {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        .btn-secondary {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+            margin-top: 20px;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+    </style>
+</head>
+<body class="container">
+    <h1 class="mt-5">Book List</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Copies</th>
+                    <th>Available</th>
+                    <th>Photo</th>
+                    <th>Reserve</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.copies }}</td>
+                    <td>{{ 'Yes' if book.available else 'No' }}</td>
+                    <td>
+                        {% if book.photo %}
+                        <img src="{{ url_for('static', filename='uploads/' ~ book.photo) }}" alt="Book Photo" width="100">
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if book.available %}
+                        <a href="{{ url_for('reserve', book_id=book.id) }}" class="btn btn-success">Reserve</a>
+                        {% else %}
+                        <button class="btn btn-secondary" disabled>Unavailable</button>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="/logout" class="btn btn-danger">Logout</a>
+</body>
+</html>
