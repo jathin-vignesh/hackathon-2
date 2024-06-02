@@ -162,7 +162,7 @@ def manage_books():
         return redirect(url_for('admin_login'))
 
     if request.method == 'POST':
-        # Check if the delete button was pressed
+       
         book_id_to_delete = request.form.get('delete')
         if book_id_to_delete:
             book_to_delete = Book.query.get(book_id_to_delete)
@@ -171,7 +171,7 @@ def manage_books():
             flash('Book deleted successfully.')
             return redirect(url_for('manage_books'))
         
-        # Check if the update button was pressed
+        
         book_id_to_update = request.form.get('update')
         if book_id_to_update:
             book_to_update = Book.query.get(book_id_to_update)
@@ -180,7 +180,7 @@ def manage_books():
             book_to_update.copies = int(request.form.get(f'copies_{book_id_to_update}'))
             book_to_update.available = book_to_update.copies > 0
             
-            # Handle photo update
+            
             photo_file = request.files.get(f'photo_{book_id_to_update}')
             if photo_file and photo_file.filename != '':
                 photo_filename = secure_filename(photo_file.filename)
@@ -199,13 +199,13 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
         
-        # Check if admin already exists
+        
         admin_user = User.query.filter_by(username='HU21CSEN0101297').first()
         if not admin_user:
             admin_user = User(username='HU21CSEN0101297', password=generate_password_hash('1234'), role='admin')
             db.session.add(admin_user)
         
-        # Add some initial books if they don't exist
+        
         if not Book.query.first():
             initial_books = [
                 Book(title='The Great Gatsby', author='F. Scott Fitzgerald', copies=3),
