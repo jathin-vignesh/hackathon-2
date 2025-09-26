@@ -16,3 +16,5 @@ By successful reservation the users will get a system generated reciept which th
 
 
 There is also a admin account with which you can add, delete and also edit the names of the books, authors, copies and the cover photo. Basically you can control everything from the admin account.
+
+This is a demo, typing on vs-code.
